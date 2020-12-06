@@ -1,3 +1,4 @@
+import config from "../config.json";
 import { accountService } from "../_services";
 
 export const fetchWrapper = {
@@ -49,7 +50,7 @@ function authHeader(url) {
   // return auth header with jwt if user is logged in and request is to the api url
   const user = accountService.userValue;
   const isLoggedIn = user && user.jwtToken;
-  const isApiUrl = url.startsWith("http://localhost:4000");
+  const isApiUrl = url.startsWith(config.apiUrl);
   if (isLoggedIn && isApiUrl) {
     return { Authorization: `Bearer ${user.jwtToken}` };
   } else {

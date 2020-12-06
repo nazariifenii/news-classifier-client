@@ -117,7 +117,7 @@ export function configureFakeBackend() {
         return ok();
       }
 
-      function register({ location }) {
+      function register() {
         const user = body();
 
         if (users.find((x) => x.email === user.email)) {
@@ -187,7 +187,7 @@ export function configureFakeBackend() {
         return ok();
       }
 
-      function forgotPassword({ location }) {
+      function forgotPassword() {
         const { email } = body();
         const user = users.find((x) => x.email === email);
 

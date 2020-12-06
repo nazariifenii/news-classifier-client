@@ -1,9 +1,8 @@
 import { fetchWrapper } from "../_helpers";
 import { alertService } from "../_services/alert.service";
-// import config from "config";
+import config from "../config.json";
 
-// const baseUrl = `${config.apiUrl}/classificator`;
-const baseUrl = `http://localhost:4000/classificator`;
+const baseUrl = `${config.apiUrl}/classificator`;
 
 export const classificatorService = {
   processText,
