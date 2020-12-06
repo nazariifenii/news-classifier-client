@@ -20,21 +20,21 @@ function Nav() {
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <div className="navbar-nav">
           <NavLink exact to="/" className="nav-item nav-link">
-            Головна
+            Main
           </NavLink>
           <NavLink to="/classificator" className="nav-item nav-link">
-            Класифікація
+            Classificator
           </NavLink>
           <NavLink to="/archive" className="nav-item nav-link">
-            Архів
+            Archive
           </NavLink>
           {user.role === Role.Admin && (
             <NavLink to="/admin" className="nav-item nav-link">
-              Адміністратор
+              Admin
             </NavLink>
           )}
           <a onClick={accountService.logout} className="nav-item nav-link">
-            Вийти
+            Sign out
           </a>
         </div>
       </nav>
