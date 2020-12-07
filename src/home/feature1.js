@@ -7,7 +7,7 @@ function Feature1Section() {
             <div className="row">
               <img
                 className="col-md-10"
-                src="https://assets.stickpng.com/images/5a0acb825a997e1c2cea10bf.png"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Newspaper_Cover2.svg/1200px-Newspaper_Cover2.svg.png"
                 alt="Fake news"
               ></img>
             </div>

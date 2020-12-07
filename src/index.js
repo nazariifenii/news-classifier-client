@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { history } from "./_helpers";
 import "./index.css";
 import App from "./App";
@@ -12,9 +12,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={history}>
+    <HashRouter history={history}>
       <App />
-    </Router>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
