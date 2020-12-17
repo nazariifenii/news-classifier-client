@@ -8,11 +8,11 @@ export const classificatorService = {
   processText,
 };
 
-function processText(text) {
+function processText(title, text) {
   return fetchWrapper
-    .put(`${baseUrl}/process-text`, { text: text })
+    .post(`${baseUrl}/process-text`, { title: title, text: text })
     .then((resp) => {
-      alertService.success("Text processing success");
+      alertService.success("Text processing success", resp);
       return resp;
     });
 }
