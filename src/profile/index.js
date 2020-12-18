@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import { Details } from "./Details";
+import { Archive } from "./Archive";
 import { Update } from "./Update";
 
 function Profile({ match }) {
@@ -11,7 +11,7 @@ function Profile({ match }) {
     <div className="p-4">
       <div className="container">
         <Switch>
-          <Route exact path={path} component={Details} />
+          <Route exact path={path} component={Archive} />
           <Route path={`${path}/update`} component={Update} />
         </Switch>
       </div>

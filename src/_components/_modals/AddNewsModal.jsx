@@ -1,16 +1,13 @@
 import React from "react";
+import { Modal, Button } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { ClassificationResultModal } from "../_components";
-import { alertService, classificatorService } from "../_services";
 
-function Classificator({ history, location }) {
-  const [modalShow, setModalShow] = React.useState(true);
-
-  const [formValues, setFormValues] = React.useState({
+function AddNewsModal(props) {
+  const initialValues = {
     title: "",
     text: "",
-  });
+  };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -18,39 +15,34 @@ function Classificator({ history, location }) {
   });
 
   function onSubmit({ title, text }, { setSubmitting }) {
-    alertService.clear();
-    classificatorService
-      .processText(title, text)
-      .then((resp) => {
-        setModalShow(true);
-        console.log("------", resp);
-        setSubmitting(false);
-      })
-      .catch((error) => {
-        setSubmitting(false);
-        alertService.error(error);
-      });
+    console.log(title, text);
   }
 
   return (
-    <section className="vh-100">
-      <div className="container">
-        <h1 className="display-4 pt-5">News classificator</h1>
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter text-center">
+          Add your news here
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <Formik
-          initialValues={formValues}
+          initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
-          onChange={({ nextValues }) => {
-            setFormValues(setFormValues);
-          }}
         >
           {({ errors, touched, isSubmitting }) => (
             <Form>
               <div className="card-body">
                 <div className="form-group">
                   <Field
-                    placeholder="Title"
                     autocomplete="off"
+                    placeholder="Title"
                     name="title"
                     type="text"
                     className={
@@ -67,7 +59,7 @@ function Classificator({ history, location }) {
                 <div className="form-group">
                   <Field
                     as="textarea"
-                    rows="14"
+                    rows="8"
                     maxlength="2000"
                     placeholder="Text"
                     name="text"
@@ -83,32 +75,26 @@ function Classificator({ history, location }) {
                     className="invalid-feedback text-left"
                   />
                 </div>
-                <div className="form-row">
-                  <div className="form-group col d-flex justify-content-start">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="btn btn-outline-primary btn-lg"
-                    >
-                      {isSubmitting && (
-                        <span className="spinner-border spinner-border-sm mr-1"></span>
-                      )}
-                      Classify text
-                    </button>
-                  </div>
+                <div className="d-flex justify-content-end">
+                  <button class="btn btn-link">Cancel</button>
+                  <Button
+                    disabled={isSubmitting}
+                    className="btn btn-lg"
+                    onClick={props.onHide}
+                  >
+                    {isSubmitting && (
+                      <span className="spinner-border spinner-border-sm mr-1"></span>
+                    )}
+                    Save
+                  </Button>
                 </div>
               </div>
             </Form>
           )}
         </Formik>
-      </div>
-      <ClassificationResultModal
-        classificationResult="Fake"
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-    </section>
+      </Modal.Body>
+    </Modal>
   );
 }
 
-export { Classificator };
+export { AddNewsModal };
