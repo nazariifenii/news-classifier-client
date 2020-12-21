@@ -5,12 +5,18 @@ import { ClassificationResultModal } from "../_components";
 import { alertService, classificatorService } from "../_services";
 
 function Classificator({ history, location }) {
-  const [modalShow, setModalShow] = React.useState(true);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [classificationResult, setClassificationResult] = React.useState();
 
   const [formValues, setFormValues] = React.useState({
     title: "",
     text: "",
   });
+
+  const classificationMap = {
+    false: "Fake",
+    true: "Real",
+  };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -23,7 +29,7 @@ function Classificator({ history, location }) {
       .processText(title, text)
       .then((resp) => {
         setModalShow(true);
-        console.log("------", resp);
+        setClassificationResult(classificationMap[resp.processingResult]);
         setSubmitting(false);
       })
       .catch((error) => {
@@ -68,7 +74,7 @@ function Classificator({ history, location }) {
                   <Field
                     as="textarea"
                     rows="14"
-                    maxlength="2000"
+                    maxLength="2000"
                     placeholder="Text"
                     name="text"
                     type="text"
@@ -103,7 +109,7 @@ function Classificator({ history, location }) {
         </Formik>
       </div>
       <ClassificationResultModal
-        classificationResult="Fake"
+        classificationResult={classificationResult}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
